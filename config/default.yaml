@@ -1,0 +1,31 @@
+# ChickGuard 默认配置：换模型、调阈值只需要改这个文件
+detector:
+  name: yolo
+  params:
+    model_path: yolov8n.pt     # 可换成自训练权重
+    confidence: 0.3
+    classes: [bird]            # COCO 模型里鸡通常被识别为 bird
+
+tracker:
+  max_distance_ratio: 0.8      # 相邻采样帧间允许的最大位移 = 0.8 * 体长（与分辨率无关）
+  max_lost_seconds: 3.0
+
+rules:
+  - name: inactivity
+    params: {window_seconds: 10, move_ratio: 0.3}
+  - name: huddling
+    params: {radius_ratio: 1.5, min_members: 6}
+  - name: outlier
+    params: {outlier_ratio: 4.0, min_tracks: 5}
+
+alert:
+  cooldown_seconds: 30
+  overlap_threshold: 0.5       # 同类告警成员重叠超过该比例视为同一事件
+
+pipeline:
+  eval_interval_seconds: 1.0
+  stride: 2                    # 每 2 帧处理 1 帧
+  max_width: 1280              # 画面宽度超过它时先缩小再处理
+
+storage:
+  db_path: events.db

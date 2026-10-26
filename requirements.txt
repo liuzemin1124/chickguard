@@ -1,0 +1,11 @@
+# 核心（运行测试只需要这两个）
+pyyaml>=6.0
+pytest>=7.0
+
+# 处理真实视频与检测
+opencv-python>=4.8
+ultralytics>=8.0
+
+# 界面与浏览器播放
+streamlit>=1.30
+imageio-ffmpeg>=0.4.9

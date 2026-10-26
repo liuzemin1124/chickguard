@@ -1,0 +1,10 @@
+__pycache__/
+.pytest_cache/
+.coverage
+*.db
+*.pt
+output/
+venv/
+.venv/
+data/samples/*
+!data/samples/.gitkeep
